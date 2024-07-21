@@ -1,0 +1,43 @@
+﻿@model CreateAboutDto
+
+@{
+    ViewData["Title"] = "CreateAbout";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Yeni Hakkımızda Girişi</h4>
+                        <p class="card-subtitle mb-4">
+                            Eklemek istediğiniz yeni Hakkımızda alanını lütfen doğru giriniz ve kaydet butonuna basınız.
+                            Temanın bozulmaması için yalnızca bir adet Banner alanı kaydı yapmayı unutmayınız.
+                        </p>
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="exampleInputTitle">Hakkımızda Başlığı</label>
+                                <input type="text" class="form-control" id="exampleInputTitle" asp-for="Title" placeholder="Başlığı Giriniz">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputDescription">Hakkımızda Açıklaması</label>
+                                <input type="text" class="form-control" id="exampleInputDescription" asp-for="Description" placeholder="Açıklamayı Giriniz">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputImageUrl">Resim URL Adresi</label>
+                                <input type="text" class="form-control" id="exampleInputImageUrl" asp-for="ImageUrl" placeholder="URL Giriniz">
+                            </div>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Hakkımızda Alanını Kaydet</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

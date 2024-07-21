@@ -1,0 +1,15 @@
+﻿@model List<ResultBlogByAuthorIdDto>
+@foreach(var item in Model)
+{
+    <div class="about-author d-flex p-4 bg-light">
+        <div class="bio mr-5" style="max-width: 150px;">
+            <img src="/carbook/images/@item.AuthorImage" 
+            alt="Image placeholder" class="img-fluid mb-4"
+            style="max-width:100%; height: auto; display: block">
+        </div>
+        <div class="desc" style="flex: 1; text-align: justify">
+            <h3 style="margin: 0; margin-bottom: 0.5rem;">@item.AuthorName</h3>
+            <p style="margin: 0;">@item.AuthorDescription</p>
+        </div>
+    </div>
+}

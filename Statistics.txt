@@ -1,0 +1,14 @@
+1. Araba Sayýsý
+2. Lokasyon Sayýsý
+3. Yazar Sayýsý
+4. Blog Sayýsý
+5. Marka Sayýsý
+6. Ortalama Araç Fiyatý (Günlük)
+7. Ortalama Araç Fiyatý (Haftalýk)
+8. Ortalama Araç Fiyatý (Aylýk)
+9. En Fazla Araca Sahip Marka Adý
+10. En Fazla Yorum Alan Blog Baþlýðý
+11. Kilometresi 100.000'den Düþük Olan Araç Sayýsý
+12. Benzin veya Dizel Yakýtlý Araçlar
+13. Elektrikli Araçlar
+14. En Pahalý ve En Ucuz Araç

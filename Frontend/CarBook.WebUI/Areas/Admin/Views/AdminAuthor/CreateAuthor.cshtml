@@ -1,0 +1,41 @@
+﻿@model CreateAuthorDto
+
+@{
+    ViewData["Title"] = "CreateAbout";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Yeni Yazar Girişi</h4>
+                        <p class="card-subtitle mb-4">
+                            Eklemek istediğiniz yeni Yazar bilgilerini lütfen doğru giriniz ve kaydet butonuna basınız.
+                        </p>
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="exampleInputName">Yazar Adı ve Soyadı</label>
+                                <input type="text" class="form-control" id="exampleInputName" asp-for="Name" placeholder="Adı Giriniz">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputDescription">Yazar Açıklaması</label>
+                                <input type="text" class="form-control" id="exampleInputDescription" asp-for="Description" placeholder="Açıklamayı Giriniz">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputImageUrl">Yazar Görseli URL Adresi</label>
+                                <input type="file" class="form-control" id="exampleInputImageUrl" asp-for="ImageUrl" placeholder="URL Giriniz">
+                            </div>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Yazarı Kaydet</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

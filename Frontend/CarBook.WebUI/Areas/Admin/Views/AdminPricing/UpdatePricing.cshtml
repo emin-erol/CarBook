@@ -1,0 +1,32 @@
+﻿@model UpdatePricingDto
+
+@{
+    ViewData["Title"] = "UpdateAbout";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Fiyatlandırma Tiplerini Güncelleme</h4>
+                        <p class="card-subtitle mb-4">
+                            Bu alanda fiyatlandırma tipleri hakkında güncelleme yapabilirsiniz.
+                        </p>
+                        <form method="post">
+                            <input type="hidden" asp-for="PricingId" />
+                            <div class="form-group">
+                                <label for="exampleInputName">Yazar Adı ve Soyadı</label>
+                                <input type="text" class="form-control" id="exampleInputName" asp-for="Name" placeholder="Adı Giriniz">
+                            </div>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Fiyatlandırma Tipini Güncelle</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

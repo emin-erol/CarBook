@@ -1,0 +1,22 @@
+﻿@model ResultGetBlogById
+
+<div class="col-md-8 ftco-animate">
+
+    <h2 class="mb-3">@Model.Title</h2>
+    <p>@Model.Description</p>
+    <p>
+        <img src="/carbook/images/+@Model.CoverImageUrl" alt="" class="img-fluid">
+    </p>
+
+    @await Component.InvokeAsync("_GetBlogDetailsTagCloudByBlogComponentPartial", new {id=ViewBag.blogId})
+
+    @await Component.InvokeAsync("_GetBlogDetailsAboutAuthorComponentPartial", new {id=ViewBag.blogId})
+
+    <div class="pt-5 mt-5">
+        
+        @await Component.InvokeAsync("_CommentListByBlogComponentPartial", new { id = ViewBag.blogId })
+
+        @await Html.PartialAsync("~/Views/Blog/AddComment.cshtml", new { id = ViewBag.blogId })
+    </div>
+
+</div>

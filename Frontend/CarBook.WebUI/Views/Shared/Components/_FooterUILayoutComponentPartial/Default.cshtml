@@ -1,0 +1,137 @@
+﻿@model List<ResultFooterAddressDto>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#sartlar_btn').click(function () {
+                swal({
+                    title: "Şartlar ve Koşullar",
+                    text: "Web sitemizi kullanarak, Şartlar ve Koşullarımızı kabul etmiş olursunuz. Bu şartlar, araç kiralama işlemleri, ödeme politikaları ve diğer önemli bilgileri kapsar. Detaylı bilgi için lütfen Şartlar ve Koşullar sayfamızı ziyaret edin.",
+                    button: "Tamam"
+                });
+            });
+
+            $('#en_iyi_fiyat_btn').click(function () {
+                swal({
+                    title: "En İyi Fiyat Garantisi",
+                    text: "Web sitemizdeki tüm araçlar için en iyi fiyat garantisi sunuyoruz. Eğer başka bir yerde daha düşük bir fiyat bulursanız, bize bildirin, size aynı fiyatı sunalım veya daha da iyisini yapalım.",
+                    button: "Tamam"
+                });
+            });
+
+            $('#cerez_btn').click(function () {
+                swal({
+                    title: "Gizlilik ve Çerez Politikası",
+                    text: "Bu web sitesi çerezleri kullanmaktadır. Çerezler, web sitesinin kullanımınızı analiz etmemize ve size daha iyi bir kullanıcı deneyimi sunmamıza yardımcı olur. Çerez kullanımı hakkında daha fazla bilgi almak için lütfen gizlilik politikamızı ziyaret edin.",
+                    button: "Tamam"
+                });
+            });
+
+            $('#sss_btn').click(function () {
+                swal({
+                    title: "Sıkça Sorulan Sorular",
+                    text: "1. Araç kiralama için hangi belgelere ihtiyacım var?\n\nCevap: Araç kiralama işlemi için geçerli bir sürücü belgesi, kimlik belgesi ve kredi kartı genellikle yeterlidir.\n\n2. Araç kiralamada yaş sınırı nedir?\n\nCevap: Genellikle 21 yaş ve üstü olmanız gerekmektedir. Bazı durumlarda bu yaş sınırı 25'e çıkabilir.\n\n3. Kiraladığım aracı başka bir şehre geri teslim edebilir miyim?\n\nCevap: Çoğu zaman mümkündür, ancak ek bir ücret ödemeniz gerekebilir. Detaylar için bizimle iletişime geçebilirsiniz.",
+                    button: "Tamam"
+                });
+            });
+
+            $('#odeme_btn').click(function () {
+                swal({
+                    title: "Ödeme Türleri",
+                    text: "1. Kredi Kartı: Visa, MasterCard ve American Express kartları kabul edilmektedir.\n\n2. Nakit Ödeme: Bazı durumlarda nakit ödeme seçeneği sunulabilir.\n\n3. Banka Havalesi: Ödemenizi banka havalesi ile yapabilirsiniz. Detaylı bilgi için bizimle iletişime geçebilirsiniz.",
+                    button: "Tamam"
+                });
+            });
+
+            $('#kiralama_turleri_btn').click(function () {
+                swal({
+                    title: "Kiralama Türleri",
+                    text: "1. Günlük Kiralama: Bir günlük kiralama süresi genellikle 24 saattir.\n\n2. Haftalık Kiralama: Haftalık kiralama seçeneği mevcuttur, daha uzun süreler için indirimler sunulabilir.\n\n3. Aylık Kiralama: Uzun dönem kiralama için aylık fiyatlandırma seçenekleri vardır.",
+                    button: "Tamam"
+                });
+            });
+
+            $('#nasil_calisir_btn').click(function () {
+                swal({
+                    title: "Nasıl Çalışır?",
+                    text: "1. Araç Seçimi: İhtiyacınıza uygun aracı seçin.\n\n2. Rezervasyon: Tarih ve süre belirleyerek aracınızı rezerve edin.\n\n3. Teslimat: Belirlenen yer ve zamanında aracınızı teslim alın veya teslim edin.",
+                    button: "Tamam"
+                });
+            });
+        });
+        
+    </script>
+
+@foreach(var item in Model)
+{
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2"><a href="#" class="logo">Car<span>book</span></a></h2>
+                        <p>@item.Description</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                        <h2 class="ftco-heading-2">Bilgi</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="/About/Index/" class="py-2 d-block">Hakkımızda</a></li>
+                            <li><a href="/Services/Index/" class="py-2 d-block">Hizmetlerimiz</a></li>
+                            <li><a href="#" id="sartlar_btn" class="py-2 d-block">Şartlar ve Koşullar</a></li>
+                            <li><a href="#" id="en_iyi_fiyat_btn" class="py-2 d-block">En İyi Fiyat Garantisi</a></li>
+                            <li><a href="#" id="cerez_btn" class="py-2 d-block">Gizlilik &amp; Çerez Politikası</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Müşteri Desteği</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" id="sss_btn" class="py-2 d-block">Sıkça Sorulan Sorular</a></li>
+                            <li><a href="#" id="odeme_btn" class="py-2 d-block">Ödeme Seçenekleri</a></li>
+                            <li><a href="#" id="kiralama_turleri_btn" class="py-2 d-block">Kiralama Türleri</a></li>
+                            <li><a href="#" id="nasil_calisir_btn" class="py-2 d-block">Nasıl Çalışır</a></li>
+                            <li><a href="/Contact/Index/" class="py-2 d-block">Bizimle İletişime Geçin</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Bir sorunuz mu var?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">@item.Address</span></li>
+                                <li><span class="icon icon-phone"></span><span class="text">@item.Phone</span></li>
+                                <li><span class="icon icon-envelope"></span><span class="text">@item.Email</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>
+                        Telif Hakları &copy;<script>document.write(new Date().getFullYear());</script> Tüm Hakları Gizlidir | Emin Erol Tarafından Tasarlandı.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+        </svg>
+    </div>
+}

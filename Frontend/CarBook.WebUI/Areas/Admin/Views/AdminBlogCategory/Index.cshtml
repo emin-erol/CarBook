@@ -1,0 +1,54 @@
+﻿@model List<ResultCategoryDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Blog Kategorileri Alanı</h4>
+                        <p class="card-subtitle mb-4">
+                            Sitedeki blog kategorileri hakkında bulunan bilgileri aşağıdaki sayfadan düzenleyebilirsiniz.
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Kategori Adı</th>
+                                        <th>Sil</th>
+                                        <th>Güncelle</th>
+                                        <th>İlgili Blogları Listele</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.Name</td>
+                                            <td><a href="/Admin/AdminBlogCategory/RemoveBlogCategory/@item.CategoryId" class="btn btn-outline-danger">Sil</a></td>
+                                            <td><a href="/Admin/AdminBlogCategory/UpdateBlogCategory/@item.CategoryId" class="btn btn-outline-success">Güncelle</a></td>
+                                            <td><a href="/Admin/AdminBlogCategory/UpdateBlogCategory/@item.CategoryId" class="btn btn-outline-success">Blogları Listele</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <a href="/Admin/AdminBlogCategory/CreateBlogCategory" class="btn btn-outline-primary">Yeni Blog Kategorisi Ekle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

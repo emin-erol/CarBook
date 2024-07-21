@@ -1,0 +1,56 @@
+﻿@model List<ResultAuthorDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Yazar Alanı</h4>
+                        <p class="card-subtitle mb-4">
+                            Anasayfanın yazarlar hakkında bulunan bilgileri aşağıdaki sayfadan düzenleyebilirsiniz.
+                            Tema bütünlüğünün bozulmaması için yalnızca bir tane veri girişi yapınız. Aksi durumlarda
+                            tema bütünlüğü bozulacaktır.
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Ad Soyad</th>
+                                        <th>Sil</th>
+                                        <th>Güncelle</th>
+                                        <th>Yazarların Blogları</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td><img src="~/carbook/images/@item.ImageUrl" width="50" height="50" style="margin-right:10px; border-radius:50%;"/>@item.Name</td>
+                                            <td><a href="/Admin/AdminAuthor/RemoveAuthor/@item.AuthorId" class="btn btn-outline-danger">Sil</a></td>
+                                            <td><a href="/Admin/AdminAuthor/UpdateAuthor/@item.AuthorId" class="btn btn-outline-success">Güncelle</a></td>
+                                            <td><a href="/Admin/AdminAuthor/UpdateAuthor/@item.AuthorId" class="btn btn-outline-success">Yazarın Blogları</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <a href="/Admin/AdminAuthor/CreateAuthor" class="btn btn-outline-primary">Yeni Yazar Ekle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
