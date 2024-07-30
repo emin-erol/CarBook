@@ -12,6 +12,7 @@ namespace CarBook.Application.Features.Mediator.Results.CarDetailResults
         public int BrandId { get; set; }
         public string BrandName { get; set; }
         public string Model { get; set; }
+        public int Year { get; set; }
         public string BigImageUrl { get; set; }
         public int Mileage { get; set; }
         public string Transmission { get; set; }

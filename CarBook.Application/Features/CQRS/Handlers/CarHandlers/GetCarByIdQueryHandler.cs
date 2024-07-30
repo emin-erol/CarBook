@@ -28,6 +28,7 @@ namespace CarBook.Application.Features.CQRS.Handlers.CarHandlers
                 CoverImageUrl = value.CoverImageUrl,
                 Fuel = value.Fuel,
                 Luggage = value.Luggage,
+                Year = value.Year,
                 Mileage = value.Mileage,
                 Model = value.Model,
                 Seat = value.Seat,

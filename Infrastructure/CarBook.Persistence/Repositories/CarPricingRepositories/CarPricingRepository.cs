@@ -38,18 +38,20 @@ namespace CarBook.Persistence.Repositories.CarPricingRepositories
 							car.CarId,
 							brand.Name,
 							car.Model,
+                            car.Year,
 							car.CoverImageUrl,
 							carPricing.PricingId,
 							carPricing.Amount
 						};
 			var data = query.ToList();
 			var pivotData = data
-				.GroupBy(d => new { d.CarId, d.Name, d.Model, d.CoverImageUrl })
+				.GroupBy(d => new { d.CarId, d.Name, d.Model, d.Year, d.CoverImageUrl })
 				.Select(g => new CarPricingViewModel
 				{
 					CarId = g.Key.CarId,
 					BrandName = g.Key.Name,
 					Model = g.Key.Model,
+                    Year = g.Key.Year,
 					CoverImageUrl = g.Key.CoverImageUrl,
 					Amounts = g.OrderBy(x => x.PricingId)
 										.Select(x => x.Amount)

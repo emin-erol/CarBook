@@ -1,0 +1,42 @@
+﻿@model List<ResultCarDetailBlogsDto>
+
+@{
+    int count = 0;
+}
+
+<div class="col-xl-6">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Bloglar</h4>
+            <p class="card-subtitle mb-4 font-size-13">
+                Tüm Kategorilere Ait Bloglar
+            </p>
+            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                <table class="table table-borderless table-hover table-centered table-nowrap mb-0">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">#</th>
+                            <th class="border-top-0">Yazar</th>
+                            <th class="border-top-0">Kategori</th>
+                            <th class="border-top-0">Blog Başlığı</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td><img src="~/carbook/images/@item.AuthorImage" width="50" height="50" style="margin-right:10px; border-radius:50%;" />@item.AuthorName</td>
+                                <td>
+                                    <span class="text-muted font-size-12">@item.CategoryName</span>
+                                </td>
+                                <td>@item.Title</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

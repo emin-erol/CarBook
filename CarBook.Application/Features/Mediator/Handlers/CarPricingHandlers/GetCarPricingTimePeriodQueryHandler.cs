@@ -25,6 +25,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.CarPricingHandlers
 				CarId = x.CarId,
 				BrandName = x.BrandName,
 				Model = x.Model,
+				Year = x.Year,
 				CoverImageUrl = x.CoverImageUrl,
 				DailyAmount = x.Amounts[0],
 				WeeklyAmount = x.Amounts[1],

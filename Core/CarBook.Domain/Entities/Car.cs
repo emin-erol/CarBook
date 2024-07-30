@@ -16,6 +16,7 @@ namespace CarBook.Domain.Entities
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
         public string Model { get; set; }
+        public int Year { get; set; }
         public string CoverImageUrl { get; set; }
         public int Mileage { get; set; }
         public string Transmission { get; set; }

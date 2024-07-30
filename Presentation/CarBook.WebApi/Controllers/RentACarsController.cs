@@ -26,5 +26,11 @@ namespace CarBook.WebApi.Controllers
             var values = await _mediator.Send(getRentACarQuery);
             return Ok(values);
         }
+        [HttpGet("CarCountsInLocation")]
+        public async Task<IActionResult> CarCountsInLocation()
+        {
+            var values = await _mediator.Send(new GetCarCountsInLocationQuery());
+            return Ok(values);
+        }
     }
 }

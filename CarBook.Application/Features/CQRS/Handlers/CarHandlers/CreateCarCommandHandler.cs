@@ -26,6 +26,7 @@ namespace CarBook.Application.Features.CQRS.Handlers.CarHandlers
                 Fuel = command.Fuel,
                 Luggage = command.Luggage,
                 Model = command.Model,
+                Year = command.Year,
                 Mileage = command.Mileage,
                 Seat = command.Seat,
                 Transmission = command.Transmission,

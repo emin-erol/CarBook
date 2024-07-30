@@ -27,6 +27,7 @@ namespace CarBook.Application.Features.CQRS.Handlers.CarHandlers
                 BigImageUrl = x.BigImageUrl,
                 CarId = x.CarId,
                 CoverImageUrl = x.CoverImageUrl,
+                Year = x.Year,
                 Fuel = x.Fuel,
                 Luggage = x.Luggage,
                 Mileage = x.Mileage,

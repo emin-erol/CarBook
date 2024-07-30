@@ -25,6 +25,7 @@ namespace CarBook.Application.Features.CQRS.Handlers.CarHandlers
                 BrandName = x.Brand.Name,
                 BigImageUrl = x.BigImageUrl,
                 CoverImageUrl = x.CoverImageUrl,
+                Year = x.Year,
                 Fuel = x.Fuel,
                 Luggage = x.Luggage,
                 Mileage = x.Mileage,

@@ -25,6 +25,7 @@ namespace CarBook.Application.Features.CQRS.Handlers.CarHandlers
                 CarId = x.CarId,
                 BrandId = x.BrandId,
                 Model = x.Model,
+                Year = x.Year,
                 CoverImageUrl = x.CoverImageUrl,
                 Mileage = x.Mileage,
                 Transmission = x.Transmission,

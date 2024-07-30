@@ -24,6 +24,7 @@ namespace CarBook.Application.Features.CQRS.Handlers.CarHandlers
             value.BigImageUrl = command.BigImageUrl;
             value.BrandId = command.BrandId;
             value.CoverImageUrl = command.CoverImageUrl;
+            value.Year = command.Year;
             value.Fuel = command.Fuel;
             value.Luggage = command.Luggage;
             value.Mileage = command.Mileage;

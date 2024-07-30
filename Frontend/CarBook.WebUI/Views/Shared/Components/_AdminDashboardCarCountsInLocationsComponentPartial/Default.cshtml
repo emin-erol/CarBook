@@ -1,0 +1,119 @@
+﻿@model List<ResultCarCountsInLocationDto>
+
+<div class="col-lg-4">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title d-inline-block">Lokasyonlardaki Araç Sayıları</h4>
+            <div class="chart-container">
+                <canvas id="carCountInLocationChart"></canvas>
+            </div>
+            <ul id="chartLegend" class="chart-legend"></ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    .chart-container {
+        position: relative;
+        width: 80%; /* Grafiğin genişliğini ayarla */
+        height: 250px; /* Grafiğin yüksekliğini ayarla */
+        margin: 0 auto; /* Ortalamak için */
+    }
+
+    .chart-legend {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 10px;
+        padding-left: 0;
+        list-style: none;
+        height: 30%; /* Legend yüksekliğini ayarla */
+        overflow-y: auto; /* Uzun legend için kaydırma ekle */
+    }
+
+        .chart-legend li {
+            display: flex;
+            align-items: center;
+            width: 50%; /* Her satırda iki eleman olacak şekilde genişliği ayarla */
+            box-sizing: border-box;
+            padding: 5px 0; /* Yatayda boşluk ekle */
+            margin: 0; /* Margini sıfırla */
+        }
+
+            .chart-legend li span {
+                background-color: currentColor;
+                display: inline-block;
+                width: 12px;
+                height: 12px;
+                margin-right: 10px;
+                border-radius: 50%;
+            }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Model verilerini al
+        const carCountsData = @Html.Raw(Json.Serialize(Model));
+
+        // Veriyi işleme
+        const labels = carCountsData.map(item => item.locationName); // Lokasyon adları
+        const values = carCountsData.map(item => item.count); // Araç sayıları
+
+        // Dinamik renkler için Chart.js renk paleti kullanımı
+        const getChartColors = (numColors) => {
+            const colorGenerator = Chart.helpers.color;
+            const baseColors = ['#FF6384', '#36A2EB', '#FFCE56', '#E7E9ED', '#C9CBCF'];
+            const colors = [];
+
+            for (let i = 0; i < numColors; i++) {
+                const color = colorGenerator(baseColors[i % baseColors.length]).alpha(0.5).rgbString();
+                colors.push(color);
+            }
+
+            return colors;
+        };
+
+        const backgroundColors = getChartColors(labels.length);
+
+        // Chart.js ile Pie Grafiği oluşturma
+        const ctx = document.getElementById('carCountInLocationChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: backgroundColors, // Dinamik renkler
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false // Chart.js legend'ını gizle
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return `${tooltipItem.label}: ${tooltipItem.raw}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Legend'ı elle oluşturma
+        const legendContainer = document.getElementById('chartLegend');
+        labels.forEach((label, index) => {
+            const li = document.createElement('li');
+            const colorBox = document.createElement('span');
+            colorBox.style.backgroundColor = backgroundColors[index]; // Renkleri al
+            const text = document.createTextNode(label);
+            li.appendChild(colorBox);
+            li.appendChild(text);
+            legendContainer.appendChild(li);
+        });
+    });
+</script>

@@ -21,6 +21,7 @@ namespace CarBook.Domain.Entities
         public int DriverLicenseYear { get; set; }
         public string? Description { get; set; }
         public string Status { get; set; }
+        public DateTime ReservationDate { get; set; }
         public Location PickUpLocation { get; set; }
         public Location DropOffLocation { get; set; }
         public Car Car { get; set; }

@@ -1,4 +1,5 @@
 ﻿using CarBook.Application.Features.Mediator.Commands.ReservationCommands;
+using CarBook.Application.Features.Mediator.Queries.ReservationQueries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,12 @@ namespace CarBook.WebApi.Controllers
         public ReservationsController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetReservationDates()
+        {
+            var values = await _mediator.Send(new GetReservationDateQuery());
+            return Ok(values);
         }
 
         [HttpPost]

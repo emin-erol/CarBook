@@ -17,6 +17,7 @@ namespace CarBook.WebApi.Controllers
         private readonly RemoveCarCommandHandler _removeCarCommandHandler;
         private readonly GetCarWithBrandQueryHandler _getCarWithBrandQueryHandler;
         private readonly GetLast5CarsWithBrandsQueryHandler _getLast5CarsWithBrandsQueryHandler;
+        private readonly GetCarCountsByYearQueryHandler _getCarCountsByYearQueryHandler;
 
         public CarsController(GetCarQueryHandler getCarQueryHandler,
             GetCarByIdQueryHandler getCarByIdQueryHandler,
@@ -24,7 +25,8 @@ namespace CarBook.WebApi.Controllers
             UpdateCarCommandHandler updateCarCommandHandler,
             RemoveCarCommandHandler removeCarCommandHandler,
             GetCarWithBrandQueryHandler getCarWithBrandQueryHandler,
-            GetLast5CarsWithBrandsQueryHandler getLast5CarsWithBrandsQueryHandler)
+            GetLast5CarsWithBrandsQueryHandler getLast5CarsWithBrandsQueryHandler,
+            GetCarCountsByYearQueryHandler getCarCountsByYearQueryHandler)
         {
             _getCarQueryHandler = getCarQueryHandler;
             _getCarByIdQueryHandler = getCarByIdQueryHandler;
@@ -33,6 +35,7 @@ namespace CarBook.WebApi.Controllers
             _removeCarCommandHandler = removeCarCommandHandler;
             _getCarWithBrandQueryHandler = getCarWithBrandQueryHandler;
             _getLast5CarsWithBrandsQueryHandler = getLast5CarsWithBrandsQueryHandler;
+            _getCarCountsByYearQueryHandler = getCarCountsByYearQueryHandler;
         }
 
         [HttpGet]
@@ -81,6 +84,12 @@ namespace CarBook.WebApi.Controllers
         public IActionResult GetLast5CarsWithBrand()
         {
             var values = _getLast5CarsWithBrandsQueryHandler.Handle();
+            return Ok(values);
+        }
+        [HttpGet("GetCarCountsByYear")]
+        public async Task<IActionResult> GetCarCountsByYear()
+        {
+            var values = await _getCarCountsByYearQueryHandler.Handle();
             return Ok(values);
         }
     }

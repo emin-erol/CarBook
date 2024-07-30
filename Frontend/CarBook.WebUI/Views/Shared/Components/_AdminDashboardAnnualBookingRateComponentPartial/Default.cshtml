@@ -1,0 +1,84 @@
+﻿@model List<ResultReservationDateDto>
+
+<div class="col-lg-4">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title d-inline-block">Yıllık Bazda Rezervasyonlar</h4>
+            <canvas id="reservationChart" height="260px"></canvas>
+            <div id="reservationInfo" class="mt-4" style="font-size:14px;"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #reservationInfo p {
+        margin: 5px 0; /* Üst ve alt margin */
+        display: flex;
+        align-items: center;
+    }
+
+    #reservationInfo .label {
+        color: #6c757d; /* Soluk renk */
+        font-weight: normal; /* Kalınlık */
+    }
+
+    #reservationInfo .year {
+        color: #6c757d; /* Yıl rengi */
+    }
+
+    #reservationInfo .bullet {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Razor modelinden verileri JavaScript'e aktarma
+        const data = @Html.Raw(Json.Serialize(Model));
+
+        // Verileri işleme
+        const years = data.map(item => item.year); // Değişkenlerin isimlendirilmesi doğru mu kontrol et
+        const counts = data.map(item => item.count);
+
+        // En fazla ve en az rezervasyonları bulma
+        const maxCount = Math.max(...counts);
+        const minCount = Math.min(...counts);
+        const maxYear = data.find(item => item.count === maxCount).year;
+        const minYear = data.find(item => item.count === minCount).year;
+
+        // Chart.js ile grafik oluşturma
+        const ctx = document.getElementById('reservationChart').getContext('2d');
+        const reservationChart = new Chart(ctx, {
+            type: 'bar', // Bar grafiği türü
+            data: {
+                labels: years, // Yıl bilgileri
+                datasets: [{
+                    label: 'Yıllık Rezervasyon',
+                    data: counts, // Rezervasyon sayıları
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Bar rengi
+                    borderColor: 'rgba(75, 192, 192, 1)', // Bar kenar rengi
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Bilgileri grafiğin altına ekleme
+        const reservationInfo = document.getElementById('reservationInfo');
+        reservationInfo.innerHTML = `
+                <p><span class="bullet" style="background-color: red;"></span> <strong>En Fazla Rezervasyon İşlemi:</strong> <span class="count"> ${maxCount}</span> (<span class="year">${maxYear}</span>)</p>
+                <p><span class="bullet" style="background-color: green;"></span> <strong>En Az Rezervasyon İşlemi: </strong> <span class="count"> ${minCount}</span> (<span class="year">${minYear}</span>)</p>
+            `;
+    });
+</script>

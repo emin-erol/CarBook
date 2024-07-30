@@ -26,6 +26,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.CarDetailHandlers
 				BrandId = value.BrandId,
 				BrandName = value.Brand.Name,
 				Mileage = value.Mileage,
+				Year = value.Year,
 				Fuel = value.Fuel,
 				BigImageUrl = value.BigImageUrl,
 				Luggage = value.Luggage,

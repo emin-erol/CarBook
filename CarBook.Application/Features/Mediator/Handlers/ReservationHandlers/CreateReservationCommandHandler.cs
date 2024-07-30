@@ -32,6 +32,7 @@ namespace CarBook.Application.Features.Mediator.Handlers.ReservationHandlers
                 PickUpLocationId = request.PickUpLocationId,
                 DropOffLocationId = request.DropOffLocationId,
                 Description = request.Description,
+                ReservationDate = DateTime.Now,
                 Status = "Alındı"
             });
         }
