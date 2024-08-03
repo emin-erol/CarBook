@@ -1,4 +1,5 @@
 ﻿using CarBook.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,17 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// Burada Sql Server bağlantısı sağlanır ve oluşturulan entity'ler tablo haline getirilir
-
 namespace CarBook.Persistence.Context
 {
-    public class CarBookContext : DbContext
+    public class CarBookContext : IdentityDbContext<AppUser, AppRole, string>
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //optionsBuilder.UseSqlServer("Server=DESKTOP-F70PD25\\SQLEXPRESS\\SQLEXPRESS;initial Catalog=CarBookDb;integrated Security=true;TrustServerCertificate=true;");
-            optionsBuilder.UseSqlServer("Server=EMIN\\SQLEXPRESS;Database=CarBookDb;Integrated Security=true; Encrypt=False;");
-        }
+        public CarBookContext(DbContextOptions<CarBookContext> options) : base(options) { }
+
         public DbSet<About> Abouts { get; set; }
         public DbSet<Banner> Banners { get; set; }
         public DbSet<Brand> Brands { get; set; }
@@ -41,6 +37,8 @@ namespace CarBook.Persistence.Context
         public DbSet<Reservation> Reservations { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Reservation>()
                 .HasOne(x => x.PickUpLocation)
                 .WithMany(y => y.PickUpReservation)

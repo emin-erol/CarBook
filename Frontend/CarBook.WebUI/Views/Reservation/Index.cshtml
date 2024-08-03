@@ -10,49 +10,47 @@
         <div class="row d-flex mb-5 contact-info">
             <div class="col-md-12 block-9 mb-md-5">
                 <h3 class="alert alert-success">Araç Rezervasyon Formu</h3>
-                <form method="post" class="bg-light p-5 contact-form">
+                <form id="reservationForm" method="post" class="bg-light p-5 contact-form">
                     <input type="hidden" asp-for="CarId" value="@ViewBag.v3" class="form-control" placeholder="Seçtiğiniz Araç">
                     <div class="form-group">
                         <label>Adınız</label>
-                        <input type="text" asp-for="Name" class="form-control" placeholder="Adınızı Giriniz">
+                        <input type="text" asp-for="Name" class="form-control" name="Name" id="Name" placeholder="Adınızı Giriniz">
                     </div>
                     <div class="form-group">
                         <label>Soyadınız</label>
-                        <input type="text" asp-for="Surname" class="form-control" placeholder="Soyadınızı Giriniz">
+                        <input type="text" asp-for="Surname" class="form-control" name="Surname" id="Surname" placeholder="Soyadınızı Giriniz">
                     </div>
                     <div class="form-group">
                         <label>Mail Adresiniz</label>
-                        <input type="email" asp-for="Email" class="form-control" placeholder="Mail Adresinizi Giriniz">
+                        <input type="email" asp-for="Email" class="form-control" name="Email" id="Email" placeholder="Mail Adresinizi Giriniz">
                     </div>
                     <div class="form-group">
                         <label>Telefon Numaranız</label>
-                        <input type="text" asp-for="Phone" class="form-control" placeholder="Telefon Numaranızı Giriniz">
+                        <input type="text" asp-for="Phone" class="form-control" name="Phone" id="Phone" placeholder="Telefon Numaranızı Giriniz">
                     </div>
                     <div class="form-group">
                         <label>Alış Lokasyonu</label>
                         <select class="form-control" asp-for="PickUpLocationId" asp-items="@ViewBag.v">
                             <option disabled selected>Lütfen Alış Lokasyonunu Seçiniz</option>
                         </select>
-                        @* @Html.DropDownListFor(x => x.PickUpLocationId, (List<SelectListItem>)ViewBag.v, new { @class = "form-control", @id = "drop" }) *@
                     </div>
                     <div class="form-group">
                         <label>İade Lokasyonu</label>
                         <select class="form-control" asp-for="DropOffLocationId" asp-items="@ViewBag.v">
                             <option disabled selected>Lütfen Teslim Lokasyonunu Seçiniz</option>
                         </select>
-                        @* @Html.DropDownListFor(x => x.DropOffLocationId, (List<SelectListItem>)ViewBag.v, new { @class = "form-control", @id = "drop" }) *@
                     </div>
                     <div class="form-group">
                         <label>Yaşınız</label>
-                        <input type="text" asp-for="Age" class="form-control" placeholder="Yaşınız">
+                        <input type="text" asp-for="Age" class="form-control" name="Age" id="Age" placeholder="Yaşınız">
                     </div>
                     <div class="form-group">
                         <label>Ehliyet Yaşı</label>
-                        <input type="text" asp-for="DriverLicenseYear" class="form-control" placeholder="Ehliyet Yaşı">
+                        <input type="text" asp-for="DriverLicenseYear" class="form-control" name="LicenseYear" id="LicenseYear" placeholder="Ehliyet Yaşı">
                     </div>
                     <div class="form-group">
                         <label>Adresiniz</label>
-                        <textarea cols="30" rows="7" asp-for="Address" class="form-control" placeholder="Açık Adresinizi Giriniz"></textarea>
+                        <textarea cols="30" rows="7" asp-for="Address" class="form-control" name="Address" id="Address" placeholder="Açık Adresinizi Giriniz"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Açıklama</label>
@@ -62,7 +60,6 @@
                         <input type="submit" value="Rezervasyonu Tamamla" class="btn btn-primary py-3 px-5">
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
