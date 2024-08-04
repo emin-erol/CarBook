@@ -1,4 +1,6 @@
-﻿using CarBook.Domain.Entities;
+﻿using CarBook.Application.Interfaces.ManagementInterfaces;
+using CarBook.Application.ViewModels.ManagementViewModels;
+using CarBook.Domain.Entities;
 using CarBook.Dto.ManagementDtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -12,13 +14,17 @@ namespace CarBook.WebApi.Controllers
     public class ManagementsController : ControllerBase
     {
         private readonly UserManager<AppUser> _userManager;
-        public ManagementsController(UserManager<AppUser> userManager)
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly IManagementRepository _managementRepository;
+        public ManagementsController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IManagementRepository managementRepository)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
+            _managementRepository = managementRepository;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterDto request)
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register(RegisterViewModel request)
         {
             if (ModelState.IsValid)
             {
@@ -32,6 +38,25 @@ namespace CarBook.WebApi.Controllers
                 return BadRequest(identityResult.Errors);
             }
             return BadRequest("Invalid model");
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginViewModel request)
+        {
+            if (!string.IsNullOrEmpty(request.Email))
+            {
+                var model = await _managementRepository.Login(request);
+                if (model.Item1)
+                {
+                    await _signInManager.SignInAsync(model.Item2, isPersistent: false);
+                    return Ok("Giriş işlemi başarılı.");
+                }
+                else
+                {
+                    return BadRequest("Giriş işlemi başarısız.");
+                }
+            }
+            return Unauthorized("Email bulunamadı.");
         }
     }
 }

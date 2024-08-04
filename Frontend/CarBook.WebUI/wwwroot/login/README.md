@@ -1,26 +1,16 @@
-<h1 align="center">UI template using HTML, CSS and Javascript :fire:</h1>
+# Bootstrap 3 login, register and forgot password templates.
+Basic bootstrap 3 login, register and forgot password templates. This is simple project only. Check it out!
 
-<h3>:one: Login screen: :arrow_down:</h3>
-<p align="center">
-  <img src="img/screenshots/login.png">
-</p>
+Login template:
 
-<h3>:two: Register screen: :arrow_down:</h3>
-<p align="center">
-  <img src="img/screenshots/register.png">
-</p>
+![alt text](image/login-form.PNG "Login template")
 
-<h3>:three: Recover password screen: :arrow_down:</h3>
-<p align="center">
-  <img src="img/screenshots/recover.png">
-</p>
+Register template:
 
-<h3>:four: Register confirmation screen: :arrow_down:</h3>
-<p align="center">
-  <img src="img/screenshots/confirm.png">
-</p>
+![alt text](image/register-form.PNG "Register template")
 
-<h3>:five: Register Error screen: :arrow_down:</h3>
-<p align="center">
-  <img src="img/screenshots/error.png">
-</p>
+Forgot password template:
+
+![alt text](image/forgot-pswd-form.PNG "Forgot password template")
+
+For more tutorial please visit: https://jaironlanda.com/blog/Bootstrap%203/bootstrap-3-login-register-and-forgot-password-template

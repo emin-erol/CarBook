@@ -1,0 +1,51 @@
+﻿@model LoginDto
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/UILayout/loginRegisterUILayout.cshtml";
+}
+
+<img class="wave" src="/login/img/wave.svg">
+<div class="container">
+    <div class="img">
+        <img src="/login/img/authentication.svg">
+    </div>
+    <div class="login-container">
+        <form method="post" asp-action="Login">
+            <h2>Giriş Yap</h2>
+            <p>Tekrar Hoşgeldiniz</p>
+            <div class="input-div one">
+                <div class="i">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <input class="input" asp-for="Email" type="text" placeholder="Eposta">
+                </div>
+            </div>
+            <div class="input-div two">
+                <div class="i">
+                    <i class="fas fa-key"></i>
+                </div>
+                <div>
+                    <input class="input" asp-for="Password" type="password" placeholder="Şifre">
+                </div>
+            </div>
+            <button type="submit" class="btn-action">Giriş Yap</button>
+            <a class="forgot" href="/Management/ForgetPassword/">Parolanızı mı Unuttunuz?</a>
+            <div class="others">
+                <hr>
+                <p>VEYA</p>
+                <hr>
+            </div>
+            <div class="social">
+                <div class="social-icons google">
+                    <a href="#"><img src="/login/img/google.png">Google İle Giriş Yap</a>
+                </div>
+            </div>
+            <div class="account">
+                <p>Henüz bir hesabınız yok mu?</p>
+                <a href="/Management/Register/">Kayıt Ol</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -23,14 +23,33 @@ namespace CarBook.WebUI.Controllers
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(request);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("https://localhost:7239/api/Managements", stringContent);
+            var response = await client.PostAsync("https://localhost:7239/api/Managements/Register", stringContent);
 
             if (response.IsSuccessStatusCode)
             {
-                TempData["SuccessMessage"] = "Kayıt İşlemi Başarılı";
-                return RedirectToAction("Register");
+                return RedirectToAction("Login");
             }
 
+            return View();
+        }
+
+        public async Task<IActionResult> Login(LoginDto request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(request);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://localhost:7239/api/Managements/Login", stringContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Default");
+            }
+            
+            return View();
+        }
+
+        public async Task<IActionResult> ForgetPassword()
+        {
             return View();
         }
     }

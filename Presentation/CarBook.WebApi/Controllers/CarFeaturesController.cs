@@ -24,19 +24,19 @@ namespace CarBook.WebApi.Controllers
         [HttpGet("CarFeatureChangeToFalse")]
         public async Task<IActionResult> CarFeatureChangeToFalse(int id)
         {
-            _mediator.Send(new UpdateCarFeatureAvailableChangeToFalseCommand(id));
+            await _mediator.Send(new UpdateCarFeatureAvailableChangeToFalseCommand(id));
             return Ok("Car Feature Available Information Has Been Updated!");
         }
         [HttpGet("CarFeatureChangeToTrue")]
         public async Task<IActionResult> CarFeatureChangeToTrue(int id)
         {
-            _mediator.Send(new UpdateCarFeatureAvailableChangeToTrueCommand(id));
+            await _mediator.Send(new UpdateCarFeatureAvailableChangeToTrueCommand(id));
             return Ok("Car Feature Available Information Has Been Updated!");
         }
         [HttpPost]
         public async Task<IActionResult> CreateCarFeatureByCar(CreateCarFeatureByCarCommand command)
         {
-            _mediator.Send(command);
+            await _mediator.Send(command);
             return Ok("Car Feature Information Has Been Created!");
         }
     }
