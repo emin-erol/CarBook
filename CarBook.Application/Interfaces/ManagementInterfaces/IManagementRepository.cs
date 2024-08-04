@@ -13,5 +13,7 @@ namespace CarBook.Application.Interfaces.ManagementInterfaces
         Task<AppUser> FindByEmailAsync(string email);
         Task<bool> CheckPasswordAsync(AppUser user, string password);
         Task<(bool, AppUser)> Login(LoginViewModel model);
+        Task<(bool,AppUser)> Register(RegisterViewModel model);
+        Task<List<AppUser>> GetAllUsers();
     }
 }

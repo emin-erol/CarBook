@@ -1,9 +1,6 @@
 ﻿using CarBook.Application.Interfaces.ManagementInterfaces;
 using CarBook.Application.ViewModels.ManagementViewModels;
 using CarBook.Domain.Entities;
-using CarBook.Dto.ManagementDtos;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,12 +10,10 @@ namespace CarBook.WebApi.Controllers
     [ApiController]
     public class ManagementsController : ControllerBase
     {
-        private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IManagementRepository _managementRepository;
-        public ManagementsController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IManagementRepository managementRepository)
+        public ManagementsController(SignInManager<AppUser> signInManager, IManagementRepository managementRepository)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
             _managementRepository = managementRepository;
         }
@@ -28,16 +23,17 @@ namespace CarBook.WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                var identityResult = await _userManager.CreateAsync(new() { UserName = request.UserName, PhoneNumber = request.Phone, Email = request.Email }, request.Password);
+                (bool, AppUser) result = await _managementRepository.Register(request);
 
-                if (identityResult.Succeeded)
+                if (result.Item1)
                 {
                     return Ok("Kayıt işlemi başarılı.");
                 }
 
-                return BadRequest(identityResult.Errors);
+                return BadRequest("Kayıt işlemi başarısız.");
+
             }
-            return BadRequest("Invalid model");
+            return BadRequest("Geçersiz model.");
         }
 
         [HttpPost("Login")]
@@ -57,6 +53,18 @@ namespace CarBook.WebApi.Controllers
                 }
             }
             return Unauthorized("Email bulunamadı.");
+        }
+
+        [HttpGet("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _managementRepository.GetAllUsers();
+            if (users.Any())
+            {
+                return Ok(users);
+            }
+            
+            return BadRequest("Hiçbir kullanıcı bulunamadı.");
         }
     }
 }

@@ -2,6 +2,7 @@
 using CarBook.Application.ViewModels.ManagementViewModels;
 using CarBook.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,20 @@ namespace CarBook.Persistence.Repositories.ManagementRepositories
             return await _userManager.CheckPasswordAsync(user, password);
         }
 
+        public async Task<(bool, AppUser)> Register(RegisterViewModel model)
+        {
+            var userModel = new AppUser { UserName = model.UserName, PhoneNumber = model.Phone, Email = model.Email };
+            var result = await _userManager.CreateAsync(userModel, model.Password);
+
+            if (result.Succeeded)
+            {
+                return (true, userModel);
+            } else
+            {
+                return (false, userModel);
+            }
+        }
+
         public async Task<(bool, AppUser)> Login(LoginViewModel model)
         {
             var user = await this.FindByEmailAsync(model.Email);
@@ -44,6 +59,11 @@ namespace CarBook.Persistence.Repositories.ManagementRepositories
                 }
             }
             return (false, user);
+        }
+
+        public async Task<List<AppUser>> GetAllUsers()
+        {
+            return await _userManager.Users.ToListAsync();
         }
     }
 }
