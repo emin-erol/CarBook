@@ -1,7 +1,6 @@
 ﻿using CarBook.Application.Features.CQRS.Commands.CarCommands;
 using CarBook.Application.Features.CQRS.Handlers.CarHandlers;
 using CarBook.Application.Features.CQRS.Queries.CarQueries;
-using CarBook.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.WebApi.Controllers
@@ -18,6 +17,7 @@ namespace CarBook.WebApi.Controllers
         private readonly GetCarWithBrandQueryHandler _getCarWithBrandQueryHandler;
         private readonly GetLast5CarsWithBrandsQueryHandler _getLast5CarsWithBrandsQueryHandler;
         private readonly GetCarCountsByYearQueryHandler _getCarCountsByYearQueryHandler;
+        private readonly GetCarDescriptionQueryHandler _getCarDescriptionQueryHandler;
 
         public CarsController(GetCarQueryHandler getCarQueryHandler,
             GetCarByIdQueryHandler getCarByIdQueryHandler,
@@ -26,7 +26,8 @@ namespace CarBook.WebApi.Controllers
             RemoveCarCommandHandler removeCarCommandHandler,
             GetCarWithBrandQueryHandler getCarWithBrandQueryHandler,
             GetLast5CarsWithBrandsQueryHandler getLast5CarsWithBrandsQueryHandler,
-            GetCarCountsByYearQueryHandler getCarCountsByYearQueryHandler)
+            GetCarCountsByYearQueryHandler getCarCountsByYearQueryHandler,
+            GetCarDescriptionQueryHandler getCarDescriptionQueryHandler)
         {
             _getCarQueryHandler = getCarQueryHandler;
             _getCarByIdQueryHandler = getCarByIdQueryHandler;
@@ -36,6 +37,7 @@ namespace CarBook.WebApi.Controllers
             _getCarWithBrandQueryHandler = getCarWithBrandQueryHandler;
             _getLast5CarsWithBrandsQueryHandler = getLast5CarsWithBrandsQueryHandler;
             _getCarCountsByYearQueryHandler = getCarCountsByYearQueryHandler;
+            _getCarDescriptionQueryHandler = getCarDescriptionQueryHandler;
         }
 
         [HttpGet]
@@ -86,11 +88,19 @@ namespace CarBook.WebApi.Controllers
             var values = _getLast5CarsWithBrandsQueryHandler.Handle();
             return Ok(values);
         }
+
         [HttpGet("GetCarCountsByYear")]
         public async Task<IActionResult> GetCarCountsByYear()
         {
             var values = await _getCarCountsByYearQueryHandler.Handle();
             return Ok(values);
+        }
+
+        [HttpGet("GetCarDescription")]
+        public async Task<IActionResult> GetCarDescription(int id)
+        {
+            var value = await _getCarDescriptionQueryHandler.Handle(new GetCarByIdQuery(id));
+            return Ok(value);
         }
     }
 }

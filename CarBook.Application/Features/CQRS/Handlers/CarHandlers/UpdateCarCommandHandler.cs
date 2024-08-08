@@ -30,6 +30,7 @@ namespace CarBook.Application.Features.CQRS.Handlers.CarHandlers
             value.Mileage = command.Mileage;
             value.Model = command.Model;
             value.Seat = command.Seat;
+            value.Description = command.Description;
             await _repository.UpdateAsync(value);
         }
     }

@@ -31,7 +31,8 @@ namespace CarBook.Application.Features.CQRS.Handlers.CarHandlers
                 Mileage = x.Mileage,
                 Model = x.Model,
                 Transmission = x.Transmission,
-                Seat = x.Seat
+                Seat = x.Seat,
+                Description = x.Description
             }).ToList();
         }
     }

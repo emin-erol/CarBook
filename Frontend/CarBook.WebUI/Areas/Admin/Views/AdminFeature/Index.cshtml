@@ -1,0 +1,51 @@
+﻿@model List<ResultFeatureDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Araç Özellikleri</h4>
+                        <p class="card-subtitle mb-4">
+                            Araçlarla ilgili yeni özellik ekleme, özellikler listesini görüntüleme, özellikler
+                            üzerinde düzenleme ve bir özelliği kaldırma işlemlerini buradan gerçekleştireilirsiniz.
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Özellik</th>
+                                        <th>Sil</th>
+                                        <th>Güncelle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <th scope="row">@count</th>
+                                            <td>@item.Name</td>
+                                            <td><a href="/AdminFeature/RemoveFeature/@item.FeatureId" class="btn btn-outline-danger">Sil</a></td>
+                                            <td><a href="/AdminFeature/UpdateFeature/@item.FeatureId" class="btn btn-outline-success">Güncelle</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <a href="/AdminFeature/CreateFeature/" class="btn btn-outline-primary">Yeni Özellik Ekle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

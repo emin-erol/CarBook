@@ -32,7 +32,8 @@ namespace CarBook.Application.Features.CQRS.Handlers.CarHandlers
                 Seat = x.Seat,
                 Luggage = x.Luggage,
                 Fuel = x.Fuel,
-                BigImageUrl = x.BigImageUrl
+                BigImageUrl = x.BigImageUrl,
+                Description = x.Description
             }).ToList();
         }
     }

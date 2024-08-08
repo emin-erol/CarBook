@@ -5,6 +5,11 @@
     Layout = "~/Views/UILayout/loginRegisterUILayout.cshtml";
 }
 
+@section Scripts 
+{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
 <img class="wave" src="/login/img/wave.svg">
 <div class="container">
     <div class="img">

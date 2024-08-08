@@ -1,4 +1,5 @@
-﻿using CarBook.Application.Interfaces.CarIntefaces;
+﻿using AutoMapper;
+using CarBook.Application.Interfaces.CarIntefaces;
 using CarBook.Domain.Entities;
 using CarBook.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +14,11 @@ namespace CarBook.Persistence.Repositories.CarRepositories
     public class CarRepository : ICarRepository
     {
         private readonly CarBookContext _context;
-        public CarRepository(CarBookContext context)
+        private readonly IMapper _mapper;
+        public CarRepository(CarBookContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public int GetCarCount()
@@ -34,6 +37,16 @@ namespace CarBook.Persistence.Repositories.CarRepositories
         {
             var values = _context.Cars.Include(x => x.Brand).Include(y => y.CarPricings).ThenInclude(z => z.Pricing).ToList();
             return values;
+        }
+
+        public async Task<string> GetCarDescription(int id)
+        {
+            var value = await _context.Cars
+                .Where(x => x.CarId == id)
+                .Select(x => x.Description)
+                .FirstOrDefaultAsync();
+            
+            return value;
         }
     }
 }

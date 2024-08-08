@@ -267,6 +267,10 @@ namespace CarBook.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Fuel")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -296,28 +300,6 @@ namespace CarBook.Persistence.Migrations
                     b.HasIndex("BrandId");
 
                     b.ToTable("Cars");
-                });
-
-            modelBuilder.Entity("CarBook.Domain.Entities.CarDescription", b =>
-                {
-                    b.Property<int>("CarDescriptionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarDescriptionId"));
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CarDescriptionId");
-
-                    b.HasIndex("CarId");
-
-                    b.ToTable("Descriptions");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Entities.CarFeature", b =>
@@ -938,17 +920,6 @@ namespace CarBook.Persistence.Migrations
                     b.Navigation("Brand");
                 });
 
-            modelBuilder.Entity("CarBook.Domain.Entities.CarDescription", b =>
-                {
-                    b.HasOne("CarBook.Domain.Entities.Car", "Car")
-                        .WithMany("CarDescriptions")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-                });
-
             modelBuilder.Entity("CarBook.Domain.Entities.CarFeature", b =>
                 {
                     b.HasOne("CarBook.Domain.Entities.Car", "Car")
@@ -1140,8 +1111,6 @@ namespace CarBook.Persistence.Migrations
 
             modelBuilder.Entity("CarBook.Domain.Entities.Car", b =>
                 {
-                    b.Navigation("CarDescriptions");
-
                     b.Navigation("CarFeatures");
 
                     b.Navigation("CarPricings");

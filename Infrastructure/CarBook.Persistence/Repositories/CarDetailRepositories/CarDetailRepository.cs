@@ -23,10 +23,5 @@ namespace CarBook.Persistence.Repositories.CarDetailRepositories
 			var value = _context.Cars.Include(x => x.Brand).Where(x => x.CarId == carId).FirstOrDefault();
 			return value;
 		}
-		public CarDescription GetCarDescriptionByCar(int carId)
-		{
-			var value = _context.Descriptions.Where(x => x.CarId == carId).FirstOrDefault();
-			return value;
-		}
-	}
+    }
 }

@@ -32,7 +32,8 @@ namespace CarBook.Application.Features.CQRS.Handlers.CarHandlers
                 Mileage = value.Mileage,
                 Model = value.Model,
                 Seat = value.Seat,
-                Transmission = value.Transmission
+                Transmission = value.Transmission,
+                Description = value.Description
             };
         }
     }

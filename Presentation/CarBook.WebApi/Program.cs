@@ -5,9 +5,9 @@ using CarBook.Application.Features.CQRS.Handlers.CarHandlers;
 using CarBook.Application.Features.CQRS.Handlers.CategoryHandlers;
 using CarBook.Application.Features.CQRS.Handlers.ContactHandlers;
 using CarBook.Application.Features.RepositoryPattern;
+using CarBook.Application.Helper;
 using CarBook.Application.Interfaces;
 using CarBook.Application.Interfaces.BlogInterfaces;
-using CarBook.Application.Interfaces.CarDescriptionInterfaces;
 using CarBook.Application.Interfaces.CarDetailIntefaces;
 using CarBook.Application.Interfaces.CarFeatureInterfaces;
 using CarBook.Application.Interfaces.CarIntefaces;
@@ -18,11 +18,9 @@ using CarBook.Application.Interfaces.RentACarInterfaces;
 using CarBook.Application.Interfaces.StatisticsInterfaces;
 using CarBook.Application.Interfaces.TagCloudInterfaces;
 using CarBook.Application.Services;
-using CarBook.Domain.Entities;
 using CarBook.Persistence.Context;
 using CarBook.Persistence.Repositories;
 using CarBook.Persistence.Repositories.BlogRepositories;
-using CarBook.Persistence.Repositories.CarDescriptionRepositories;
 using CarBook.Persistence.Repositories.CarDetailRepositories;
 using CarBook.Persistence.Repositories.CarFeatureRepositories;
 using CarBook.Persistence.Repositories.CarPricingRepositories;
@@ -33,7 +31,9 @@ using CarBook.Persistence.Repositories.ManagementRepositories;
 using CarBook.Persistence.Repositories.RentACarRepositories;
 using CarBook.Persistence.Repositories.StatisticsRepositories;
 using CarBook.Persistence.Repositories.TagCloudRepositories;
+using CarBook.WebApi.Extensions;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,7 +44,14 @@ builder.Services.AddDbContext<CarBookContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<CarBookContext>();
+builder.Services.AddIdentityExt();
+
+var config = new AutoMapper.MapperConfiguration(cfg =>
+{
+    cfg.AddProfile(new CarBookMapper());
+});
+var mapper = config.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 builder.Services.AddScoped<CarBookContext>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -57,7 +64,6 @@ builder.Services.AddScoped(typeof(IStatisticsRepository), typeof(StatisticsRepos
 builder.Services.AddScoped(typeof(IRentACarRepository), typeof(RentACarRepository));
 builder.Services.AddScoped(typeof(ICarFeatureRepository), typeof(CarFeatureRepository));
 builder.Services.AddScoped(typeof(ICarDetailRepository), typeof(CarDetailRepository));
-builder.Services.AddScoped(typeof(ICarDescriptionRepository), typeof(CarDescriptionRepository));
 builder.Services.AddScoped(typeof(IDashboardRepository), typeof(DashboardRepository));
 builder.Services.AddScoped(typeof(IManagementRepository), typeof(ManagementRepository));
 
@@ -87,6 +93,7 @@ builder.Services.AddScoped<RemoveCarCommandHandler>();
 builder.Services.AddScoped<GetCarWithBrandQueryHandler>();
 builder.Services.AddScoped<GetLast5CarsWithBrandsQueryHandler>();
 builder.Services.AddScoped<GetCarCountsByYearQueryHandler>();
+builder.Services.AddScoped<GetCarDescriptionQueryHandler>();
 
 builder.Services.AddScoped<GetCategoryQueryHandler>();
 builder.Services.AddScoped<GetCategoryByIdQueryHandler>();
